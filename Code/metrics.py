@@ -2,7 +2,7 @@
 
 import pandas        as pd
 from sklearn.metrics import confusion_matrix, r2_score, balanced_accuracy_score
-from sklearn.metrics import recall_score, f1_score, roc_auc_score
+from sklearn.metrics import recall_score, f1_score, roc_auc_score, matthews_corrcoef
 
 """
 The docstrings for each graph contain the following:
@@ -68,6 +68,7 @@ def confusion_matrix_dataframe(y, y_predicted, columns, index):
     Description:
     ------------
     Generates a confusion matrix through sklearn and transforms it into a Pandas dataframe.
+    This can work with binary or multi-class classification.
 
     Returns:
     --------
@@ -77,7 +78,7 @@ def confusion_matrix_dataframe(y, y_predicted, columns, index):
     matrix = pd.DataFrame(cm, columns = columns, index = index)
     return matrix
 
-def specificity(y, y_pred):
+def binary_specificity(y, y_predicted):
     """
     Parameters:
     -----------
@@ -92,29 +93,37 @@ def specificity(y, y_pred):
     --------
     The specificity score: a floating point number between 0 and 1
     """
-    cm = confusion_matrix(y, y_pred)  
+    cm = confusion_matrix(y, y_predicted)  
     specificity = cm[0,0] / (cm[0,0] + cm[0,1])
     return specificity
 
-def classification_table(y, y_predicted):
+def ternary_specificity(y, y_predicted):
     """
     Parameters:
     -----------
-    y           : the true values       :
-    y_predicted : the model predictions :
+    y           : the true values       : :
+    y_predicted : the model predictions : :
 
     Description:
     ------------
-    Creats a six digit summary of classification model performance using balanced accuracy, specificity, sensitivity, F1 score, & the AUROC score.
+    Calculates the percentage of "negative" classes that are classified correctly as "negative".  A confusion matrix is generated and the scores for each class are
+    averaged.
 
     Returns:
     --------
-    A Pandas dataframe of the six scores.
+    The specificity score: a floating point number between 0 and 1.
     """
+    cm = confusion_matrix(y, y_predicted)
+    s1 = cm[0,0] / (cm[0,0] + cm[0,1] + cm[0,2])
+    s2 = cm[1,1] / (cm[0,1] + cm[1,1] + cm[1,2])
+    s3 = cm[2,2] / (cm[0,2] + cm[1,2] + cm[2,2]])
+    specificity = (s1 + s2 + s3) / 3
+    return specificity
+
+def ternary_classification_summary(y, y_predicted):
     bal_acc = balanced_accuracy_score(y, y_predicted)
-    spec    = specificity(y, y_predicted)
-    sens    = recall_score(y, y_predicted)
-    f1      = f1_score(y, y_predicted)
-    auroc   = roc_auc_score(y, y_predicted)
-    table   = pd.DataFrame([bal_acc, spec, sens, f1, auroc], index = ["Balanced Accuracy", "Specificity", "Sensitivity", "F1 Score", "AUROC Score"]).T
-    return table
+    recall  = recall_score(y, y_predicted, average = "macro")
+    spec    = ternary_specificity(y, y_predicted)
+    mcc     = matthews_corrcoef(y, y_predicted)
+    classification_summary = pd.DataFrame([bal_acc, recall, spec, mcc], index = ["Balanced Accuracy", "Sensitivity", "Specificity", "Matthew Corr. Coef."]).T
+    return classification_summary
