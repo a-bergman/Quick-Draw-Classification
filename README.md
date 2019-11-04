@@ -6,7 +6,7 @@ Interpretation of hand written or drawn characters is an important area for mach
 
 The Quick, Draw! game can be found [here](https://quickdraw.withgoogle.com/).
 
-The data set we used can be found [here](https://github.com/googlecreativelab/quickdraw-dataset#get-the-data).
+The data set we used can be found [here](https://github.com/googlecreativelab/quickdraw-dataset#get-the-data).  We used their bear, cat, and dog data.
 
 For the purposes of this project, we used the data in two formats:
 
@@ -22,7 +22,11 @@ The files were natively black & white so all we had to do was scale each pixel: 
 
 We used a Keras convolutional neural network to classify each image.  The geometry of the network is fairly simple: two convolutional and maxpooling layers followed by three hidden layers.  We were concerned about overfitting, which is common with neural networks, we decided to add in several regularization methods: $\ell$<sub>2</sub> regularization in the hidden nodes, dropout between each node, and finally early stopping in the fitting stage.
 
-# Conclusions & Recommendations
+# Conclusions
+
+Our model was good in that it was minimally overfit and its metrics were uniformly acceptable.  We did not really focus on the preprocessing of the data, because the data was already preprocessed for us by Google.  Instead we put a lot of effort into model itself by experimenting with model parameters and regularization parameters.  Doing that allowed us to minimalize overfitting, but we plateaued our actual scores: they only increased by a few points with our optimized parameters.  We believe that  further tuning of the model can improve our results.
+
+We believe that the reason our model never really improved dramatically is because of the data itself: Google never says _how_ to draw a bear, cat, or dog.  As a result, we have many different versions of the animals some of which are more similar than others.  If our data had more distinct drawings, we believe that our model would be better.  Another factor is the size of the images, which are only 28x28 pixels and are very small.
 
 # Links
 
