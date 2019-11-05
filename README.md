@@ -30,6 +30,6 @@ We believe that the reason our model never really improved dramatically is becau
 
 # Links
 
-The presentation for this project can be found [here]()
+The presentation for this project can be found [here](https://docs.google.com/presentation/d/1vp7BW1ATyeRhxoBqRlkCBMQMcDdtcqNvnNhejgtc_p4/edit?usp=sharing)
 
 The blog post for this project can be read [here]()
