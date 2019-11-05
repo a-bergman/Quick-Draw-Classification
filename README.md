@@ -32,4 +32,4 @@ We believe that the reason our model never really improved dramatically is becau
 
 The presentation for this project can be found [here](https://docs.google.com/presentation/d/1vp7BW1ATyeRhxoBqRlkCBMQMcDdtcqNvnNhejgtc_p4/edit?usp=sharing)
 
-The blog post for this project can be read [here]()
+The blog post for this project can be read [here](https://medium.com/@andrew.j.bergman/animal-sketches-e7661fd74b8a)
