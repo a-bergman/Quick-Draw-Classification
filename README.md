@@ -20,7 +20,7 @@ Firstly, we had three different files which had to be concatenated together and 
 
 The files were natively black & white so all we had to do was scale each pixel: they range in value from 0 to 255 so we just divided each by 255 and forced each pixel to be floats.  Once that was finished, we then were able to force each row in the dataframe to be a 28x28x1 array.  After this point, we were able to start the modeling process.
 
-We used a Keras convolutional neural network to classify each image.  The geometry of the network is fairly simple: two convolutional and maxpooling layers followed by three hidden layers.  We were concerned about overfitting, which is common with neural networks, we decided to add in several regularization methods: $\ell$<sub>2</sub> regularization in the hidden nodes, dropout between each node, and finally early stopping in the fitting stage.
+We used a Keras convolutional neural network to classify each image.  The geometry of the network is fairly simple: two convolutional and maxpooling layers followed by three hidden layers.  We were concerned about overfitting, which is common with neural networks, we decided to add in several regularization methods: L<sub>2</sub> regularization in the hidden nodes, dropout between each node, and finally early stopping in the fitting stage.
 
 # Conclusions
 
