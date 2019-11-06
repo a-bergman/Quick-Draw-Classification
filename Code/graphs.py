@@ -244,7 +244,7 @@ def countplots(df, columns, titles, labels, ylabel, dim, row, col, orient = "h",
         ax = fig.add_subplot(row, col, count)
         title = titles[c]
         plt.title(f"{title}", size = 18)
-        sns.countplot(x = column, data = df, orient = orient, hue = hue)
+        sns.countplot(x = column, data = df, orient = orient, hue = hue, palette = "deep")
         plt.xlabel(f"{labels[c]}", size = 16)
         plt.ylabel(f"{ylabel}", size = 16)
         plt.xticks(size = 14)
